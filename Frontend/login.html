@@ -1,0 +1,65 @@
+<h2 id="welcome"></h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentinel AI Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h1>🛡️ Sentinel AI</h1>
+    <h3>Secure Login</h3>
+
+    <input id="username" type="text" placeholder="Username">
+
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <p id="message"></p>
+
+</div>
+
+
+<script>
+
+async function login(){
+
+let username = document.getElementById("username").value;
+let password = document.getElementById("password").value;
+
+let response = await fetch("http://127.0.0.1:5000/login", {
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+username:username,
+password:password
+})
+
+});
+
+
+let data = await response.json();
+
+document.getElementById("message").innerHTML = data.message;
+
+
+if(data.status=="authorized"){
+    window.location.href="index.html";
+}
+
+}
+
+</script>
+
+
+</body>
+</html>

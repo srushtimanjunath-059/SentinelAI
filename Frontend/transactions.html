@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transactions - Sentinel AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+🛡️ Sentinel AI
+</div>
+
+<ul>
+<li><a href="index.html">Dashboard</a></li>
+<li><a href="transactions.html">Transactions</a></li>
+<li><a href="alerts.html">Alerts</a></li>
+<li><a href="analytics.html">Analytics</a></li>
+<li><a href="settings.html">Settings</a></li>
+</ul>
+
+</nav>
+
+<header>
+<h1>Transaction Analysis</h1>
+<p>Analyze transactions using Sentinel AI</p>
+</header>
+
+<div class="form-container">
+
+<div class="card">
+
+<h2>Enter Transaction Details</h2>
+
+<input type="number" id="amount" placeholder="Transaction Amount">
+
+<select id="payment">
+<option>UPI</option>
+<option>Credit Card</option>
+<option>Debit Card</option>
+<option>Net Banking</option>
+</select>
+
+<input type="text" id="location" placeholder="Transaction Location">
+
+<select id="device">
+<option>Mobile</option>
+<option>Laptop</option>
+<option>Tablet</option>
+</select>
+
+<button onclick="analyzeTransaction()">
+Analyze Transaction
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Analysis Result</h2>
+
+<h1 id="risk">0%</h1>
+
+<p id="status">
+Waiting for analysis...
+</p>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

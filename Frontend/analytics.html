@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics - Sentinel AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+🛡️ Sentinel AI
+</div>
+
+<ul>
+<li><a href="index.html">🏠 Dashboard</a></li>
+<li><a href="transaction.html">💳 Transactions</a></li>
+<li><a href="alert.html">🚨 Alerts</a></li>
+<li><a href="analytics.html">📊 Analytics</a></li>
+<li><a href="history.html">📜 History</a></li>
+<li><a href="settings.html">⚙️ Settings</a></li>
+</ul>
+
+</nav>
+
+<header>
+<h1>📊 Analytics Dashboard</h1>
+<p>Real-Time Fraud Monitoring Statistics</p>
+</header>
+
+<div class="dashboard">
+
+<div class="card">
+<h2>Total Transactions</h2>
+<h1 id="totalTransactions">0</h1>
+</div>
+
+<div class="card">
+<h2>Average Risk Score</h2>
+<h1 id="avgRisk">0%</h1>
+</div>
+
+<div class="card">
+<h2>Fraud Cases</h2>
+<h1 id="fraudCases">0</h1>
+</div>
+
+<div class="card">
+<h2>Highest Risk</h2>
+<h1 id="highestRisk">0%</h1>
+</div>
+
+</div>
+
+<script>
+
+async function loadAnalytics(){
+
+    try {
+
+        const response =
+        await fetch("http://127.0.0.1:8000/transactions");
+
+        const data =
+        await response.json();
+
+        console.log("Data received:", data);
+
+        document.getElementById(
+            "totalTransactions"
+        ).innerText = data.length;
+
+        if(data.length === 0){
+            return;
+        }
+
+        let totalRisk = 0;
+        let highestRisk = 0;
+        let fraudCount = 0;
+
+        data.forEach(t => {
+
+            totalRisk += t.risk_score;
+
+            if(t.risk_score > highestRisk){
+                highestRisk = t.risk_score;
+            }
+
+            if(t.risk_score >= 60){
+                fraudCount++;
+            }
+
+        });
+
+        let averageRisk =
+        (totalRisk / data.length).toFixed(1);
+
+        document.getElementById(
+            "avgRisk"
+        ).innerText = averageRisk + "%";
+
+        document.getElementById(
+            "fraudCases"
+        ).innerText = fraudCount;
+
+        document.getElementById(
+            "highestRisk"
+        ).innerText = highestRisk + "%";
+
+    }
+    catch(error){
+
+        alert("Error: " + error);
+
+        console.log(error);
+
+    }
+}
+
+loadAnalytics();
+
+</script>
+
+async function loadAnalytics(){
+
+    const response =
+    await fetch("http://127.0.0.1:8000/transactions");
+
+    const data =
+    await response.json();
+
+    document.getElementById(
+        "totalTransactions"
+    ).innerText = data.length;
+
+    if(data.length === 0){
+        return;
+    }
+
+    let totalRisk = 0;
+    let highestRisk = 0;
+    let fraudCount = 0;
+
+    data.forEach(t => {
+
+        totalRisk += t.risk_score;
+
+        if(t.risk_score > highestRisk){
+            highestRisk = t.risk_score;
+        }
+
+        if(t.risk_score >= 60){
+            fraudCount++;
+        }
+
+    });
+
+    let averageRisk =
+        (totalRisk / data.length).toFixed(1);
+
+    document.getElementById(
+        "avgRisk"
+    ).innerText = averageRisk + "%";
+
+    document.getElementById(
+        "fraudCases"
+    ).innerText = fraudCount;
+
+    document.getElementById(
+        "highestRisk"
+    ).innerText = highestRisk + "%";
+}
+
+loadAnalytics();
+
+</script>
+
+</body>
+</html>
