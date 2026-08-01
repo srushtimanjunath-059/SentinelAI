@@ -1,0 +1,47 @@
+body{
+    background:#050b18;
+    color:white;
+    font-family:Arial;
+}
+
+
+header{
+    text-align:center;
+    padding:30px;
+}
+
+
+header h1{
+    color:#00eaff;
+    font-size:45px;
+}
+
+
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+}
+
+
+.card{
+    background:#111827;
+    padding:25px;
+    width:220px;
+    text-align:center;
+    border-radius:15px;
+    box-shadow:0 0 15px #00eaff;
+}
+
+
+.card h1{
+    color:#00eaff;
+}
+
+
+.monitor{
+    margin:40px;
+    background:#111827;
+    padding:30px;
+    border-radius:15px;
+}
